@@ -1,10 +1,10 @@
-package com.servicios.prestamos;
+package com.servicios.CommonLibrary;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PrestamosApplicationTests {
+class CommonLibraryApplicationTests {
 
 	@Test
 	void contextLoads() {
