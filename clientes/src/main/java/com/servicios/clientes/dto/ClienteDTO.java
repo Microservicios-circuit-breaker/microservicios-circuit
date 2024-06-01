@@ -26,10 +26,7 @@ public class ClienteDTO {
 	@NotNull( message 	=  ClienteUtilities.CEDULA_NO_NULL  )
 	private String cedula;
 	
-	
-	
-	public ClienteDTO() {
-	}
+	public ClienteDTO() {}
 	
 	public ClienteDTO(String nombre, String email, String cedula, Long id ) {
 		this.id = id;
