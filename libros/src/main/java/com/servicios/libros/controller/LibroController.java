@@ -2,6 +2,7 @@ package com.servicios.libros.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,36 +32,31 @@ import lombok.extern.slf4j.Slf4j;
 @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 public class LibroController {
 
+    @Autowired
 	private ILibroService iLibroService;
 
     @GetMapping( path = "/obtenerTodos" )
-    public ResponseEntity<List<LibroDTO>> getAllLibros() throws LibroException{
-        return new ResponseEntity<List<LibroDTO>>(iLibroService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<LibroDTO>> getAllLibros() throws LibroException {
+        return new ResponseEntity<>(iLibroService.getAll(), HttpStatus.OK);
     }
     
     @GetMapping( path = "/obtenerPorId/{id}" )
     public ResponseEntity<LibroDTO> getLibroById(@PathVariable Long id) throws LibroException {
-    	return new ResponseEntity<LibroDTO>(iLibroService.getLibroById(id), HttpStatus.OK);
+    	return new ResponseEntity<>(iLibroService.getLibroById(id), HttpStatus.OK);
     }
     
     @PostMapping( path = "/crear" )
-    public ResponseEntity<LibroDTO> createLibro(@Valid @RequestBody LibroDTO libroDTO) throws LibroException{   
-        return new ResponseEntity<LibroDTO>(iLibroService.createLibro(libroDTO), HttpStatus.CREATED);
+    public ResponseEntity<LibroDTO> createLibro(@Valid @RequestBody LibroDTO libroDTO) throws LibroException {   
+        return new ResponseEntity<>(iLibroService.createLibro(libroDTO), HttpStatus.CREATED);
     }
     
     @PutMapping( path = "/actualizar" )
-    public ResponseEntity<LibroDTO> updateLibro(@Valid @RequestBody UpdateLibroDTO updateLibroDTO) throws LibroException{
-        return new ResponseEntity<LibroDTO>(iLibroService.updateLibro(updateLibroDTO), HttpStatus.OK);
+    public ResponseEntity<LibroDTO> updateLibro(@Valid @RequestBody UpdateLibroDTO updateLibroDTO) throws LibroException {
+        return new ResponseEntity<>(iLibroService.updateLibro(updateLibroDTO), HttpStatus.OK);
     }
 	
     @DeleteMapping( path = "/eliminar/{id}" )
-    public ResponseEntity<String> deleteLibro( @RequestBody Long id) throws LibroException{
-    	return new ResponseEntity<String> (iLibroService.deleteLibro(id), HttpStatus.OK );
+    public ResponseEntity<String> deleteLibro(@PathVariable Long id) throws LibroException {
+    	return new ResponseEntity<>(iLibroService.deleteLibro(id), HttpStatus.OK);
     }
-    
 }
-
-
-
-
-
