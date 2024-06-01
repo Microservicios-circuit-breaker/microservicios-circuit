@@ -11,10 +11,7 @@ public class ClienteDTO {
 	private String email;
 	private String cedula;
 	
-	
-	
-	public ClienteDTO() {
-	}
+	public ClienteDTO() {}
 	
 	public ClienteDTO(String nombre, String email, String cedula) {
 		this.nombre = nombre;
