@@ -23,10 +23,12 @@ import com.servicios.clientes.exception.ClienteException;
 import com.servicios.clientes.services.IClienteService;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
 @RequestMapping("/api/cliente")
+@Slf4j
 @CrossOrigin(origins = "*", methods = { RequestMethod.DELETE, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT })
 public class ClienteController {
 	
