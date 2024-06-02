@@ -43,7 +43,7 @@ public class ClienteService implements IClienteService{
 	public ClienteDTO actaulizarCliente( ClienteUpdDTO clienteUpdDTO) throws ClienteException {
 		
 		if( !clienteRepository.existsById( clienteUpdDTO.getId())) throw new ClienteException(ClienteUtilities.ID_NO_EXISTE );		
-		return ClienteMapper.modelToDto( clienteRepository.save( ClienteMapper.dtoToModel( ClienteMapper.updDtoToDto(clienteUpdDTO ) ) ) );
+		return ClienteMapper.modelToDto( clienteRepository.save( ClienteMapper.updDtoToModel( clienteUpdDTO ) ) );
 	}
 
 	@Override
