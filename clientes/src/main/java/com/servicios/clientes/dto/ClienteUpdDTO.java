@@ -1,14 +1,17 @@
 package com.servicios.clientes.dto;
-import lombok.Builder;
 
 import com.servicios.clientes.utilities.ClienteUtilities;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-@Builder
-public class ClienteDTO {
+public class ClienteUpdDTO {
 	
-
+	@NotBlank( message = ClienteUtilities.ID_NO_VACIO )
+	@NotNull( message =  ClienteUtilities.ID_NO_NULL )
+	private Long id;
 	
 	@Size( max = 30, min = 3, message = ClienteUtilities.NOMBRE_CARACTERES )
 	@NotBlank( message = ClienteUtilities.NOMBRE_NO_VACIO )
@@ -24,9 +27,9 @@ public class ClienteDTO {
 	@NotNull( message 	=  ClienteUtilities.CEDULA_NO_NULL  )
 	private String cedula;
 	
-	public ClienteDTO() {}
+	public ClienteUpdDTO() {}
 	
-	public ClienteDTO(String nombre, String email, String cedula) {
+	public ClienteUpdDTO(String nombre, String email, String cedula) {
 		this.nombre = nombre;
 		this.email = email;
 		this.cedula = cedula;
@@ -38,7 +41,13 @@ public class ClienteDTO {
 		return "ClienteDTO [nombre=" + nombre + ", email=" + email + ", cedula=" + cedula + "]";
 	}
 
-
+	public void setId( Long id ) {
+		this.id = id;
+	}
+	
+	public Long getId() {
+		return id;
+	}
 
 	public String getNombre() {
 		return nombre;
