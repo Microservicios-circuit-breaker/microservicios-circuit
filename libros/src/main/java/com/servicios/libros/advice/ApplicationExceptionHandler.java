@@ -5,7 +5,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import com.servicios.libros.exception.LibroException;
 
 import java.util.HashMap;
@@ -27,20 +26,10 @@ public class ApplicationExceptionHandler {
 
         return errors;
     }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(LibroException.class)
-    public Map<String, String> handleUserException(LibroException ex) {
-        Map<String, String> errors = new HashMap<>();
-
-        errors.put(error_const, ex.getMessage());
-
-        return errors;
-    }
     
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(LibroException.class)
-    public Map<String,String> handleLibroException( LibroException ex ){
+    public Map<String,String> handleClientException( LibroException ex ){
     	
         Map<String, String> errors = new HashMap<>();
         errors.put(error_const, ex.getMessage());
@@ -50,9 +39,10 @@ public class ApplicationExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public Map<String, String> handleAnyException(Exception ex) {
-    	
         Map<String, String> errors = new HashMap<>();
+
         errors.put(error_const, ex.getMessage());
+
         return errors;
     }
 }
