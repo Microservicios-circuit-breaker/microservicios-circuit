@@ -9,6 +9,6 @@ import com.servicios.CommonLibrary.models.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	boolean existsById( Long id );
-	boolean existsByCorreo( String correo );
+	boolean existsByEmail( String email );
 	boolean existsByCedula( String cedula );
 }
