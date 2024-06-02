@@ -37,14 +37,22 @@ public class ApplicationExceptionHandler {
 
         return errors;
     }
-
+    
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(LibroException.class)
+    public Map<String,String> handleLibroException( LibroException ex ){
+    	
+        Map<String, String> errors = new HashMap<>();
+        errors.put(error_const, ex.getMessage());
+        return errors;
+    }
+    
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public Map<String, String> handleAnyException(Exception ex) {
+    	
         Map<String, String> errors = new HashMap<>();
-
         errors.put(error_const, ex.getMessage());
-
         return errors;
     }
 }
