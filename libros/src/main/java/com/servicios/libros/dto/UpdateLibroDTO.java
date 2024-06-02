@@ -5,12 +5,13 @@ import com.servicios.libros.utilities.LibroUtility;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
 
-@Builder
-public class LibroDTO {
+public class UpdateLibroDTO {
 	
-
+	@NotBlank( message = LibroUtility.ID_NOT_NULL )
+	@NotNull( message = LibroUtility.ID_NOT_EMPTY )
+	private Long id;
+	
 	@Size( max = 30, min = 3, message = LibroUtility.TITULO_SIZE )
 	@NotBlank( message = LibroUtility.TITULO_NOT_EMPTY )
 	@NotNull( message = LibroUtility.TITULO_NOT_NULL )
@@ -24,14 +25,23 @@ public class LibroDTO {
 	private ClienteDTO clienteDTO;
 	
 
-	public LibroDTO() {}
+	public UpdateLibroDTO() {}
 	
-	public LibroDTO( String titulo, String autor, ClienteDTO clienteDTO) {
+	public UpdateLibroDTO(Long id, String titulo, String autor, ClienteDTO clienteDTO) {
+		this.id = id;
 		this.autor = autor;
 		this.titulo = titulo;
 		this.clienteDTO = clienteDTO;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public ClienteDTO getClienteDTO() {
 		return clienteDTO;
 	}
@@ -56,5 +66,4 @@ public class LibroDTO {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	
 }

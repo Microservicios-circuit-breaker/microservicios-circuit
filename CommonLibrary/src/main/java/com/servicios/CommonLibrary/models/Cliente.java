@@ -10,6 +10,7 @@ public class Cliente {
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
 	private Long id;
 	
+
 	@Column( name = "nombre")
 	private String nombre;
 	
@@ -19,12 +20,11 @@ public class Cliente {
 	@Column( name = "cedula")
 	private String cedula;
 
-	
-	
 	public Cliente() {
 	}
 
 	public Cliente(Long id, String nombre, String email, String cedula) {
+
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
@@ -62,6 +62,5 @@ public class Cliente {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
-	
 	
 }
