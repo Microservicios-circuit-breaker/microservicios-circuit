@@ -18,6 +18,16 @@ public class ClienteMapper {
 		return clienteDTO;
 	}
 	
+	public static Cliente updDtoToModel( ClienteUpdDTO clienteUpdDto ) {
+		Cliente cliente = new Cliente();
+		cliente.setId( clienteUpdDto.getId() );
+		cliente.setNombre(clienteUpdDto.getNombre());
+		cliente.setEmail(clienteUpdDto.getEmail());
+		cliente.setCedula(clienteUpdDto.getCedula());
+		
+		return cliente;
+	}
+	
 	public static ClienteDTO updDtoToDto( ClienteUpdDTO clienteUpdDto ) {
 		
 		ClienteDTO clienteDTO = new ClienteDTO();

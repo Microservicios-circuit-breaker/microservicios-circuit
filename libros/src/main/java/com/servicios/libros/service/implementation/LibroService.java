@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.servicios.CommonLibrary.models.Libro;
+import com.servicios.libros.dto.CreateLibroDTO;
 import com.servicios.libros.dto.LibroDTO;
 import com.servicios.libros.dto.UpdateLibroDTO;
 import com.servicios.libros.exception.LibroException;
@@ -38,20 +40,28 @@ public class LibroService implements ILibroService{
 	}
 
 	@Override
-	public LibroDTO createLibro(LibroDTO libroDTO) throws LibroException {
+	public LibroDTO createLibro(CreateLibroDTO createlibroDTO) throws LibroException {
 		
-		if( !clienteRepository.existsById( libroDTO.getClienteDTO().getId())) throw new LibroException(LibroUtility.CLIENTE_EXIST);
-		if( libroRepository.existsByTitulo( libroDTO.getTitulo())) throw new LibroException(LibroUtility.TITULO_EXIST);
+		if( !clienteRepository.existsById( createlibroDTO.getId_propietario() )) throw new LibroException(LibroUtility.CLIENTE_EXIST);
+		if( libroRepository.existsByTitulo( createlibroDTO.getTitulo())) throw new LibroException(LibroUtility.TITULO_NO_EXIST);
 		
-		return LibroMapper.modelToDto( libroRepository.save( LibroMapper.dtoToModel(libroDTO) ));
+		
+		Libro libro = LibroMapper.createLibroDtoToModel(createlibroDTO);
+		
+		libro.setCliente( clienteRepository.getReferenceById( createlibroDTO.getId_propietario()));
+		return LibroMapper.modelToDto( libroRepository.save( libro ));
 	}
 
 	@Override
 	public LibroDTO updateLibro(UpdateLibroDTO updateLibroDTO) throws LibroException {
 		
 		if (!libroRepository.existsById(updateLibroDTO.getId())) throw new LibroException(LibroUtility.LIBRO_NOT_FOUND);
-		return LibroMapper.modelToDto(libroRepository.save(LibroMapper.updDtoToModel(updateLibroDTO)));
+		if( !clienteRepository.existsById( updateLibroDTO.getId_propietario() )) throw new LibroException(LibroUtility.CLIENTE_EXIST);
 		
+		Libro libro = LibroMapper.updDtoToModel( updateLibroDTO );
+		libro.setCliente( clienteRepository.getReferenceById( updateLibroDTO.getId_propietario() ));
+		
+		return LibroMapper.modelToDto(libroRepository.save( libro ));
 	}
 
 	@Override

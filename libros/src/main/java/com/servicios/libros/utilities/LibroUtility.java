@@ -9,6 +9,7 @@ public class LibroUtility {
 	public static final String TITULO_NOT_EMPTY = "El Titulo no debe estar vacio";
 	public static final String TITULO_SIZE = "El Titulo debe de tener entre 3 y 30 caracteres";
 	public static final String TITULO_EXIST = "El libro debe de existir";
+	public static final String TITULO_NO_EXIST = "El titulo no debe existir";
 	
 	public static final String AUTOR_NOT_NULL = "El Autor no debe ser nulo";
 	public static final String AUTOR_NOT_EMPTY = "El Autor no debe estar vacio";
