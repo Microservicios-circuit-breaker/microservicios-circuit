@@ -1,14 +1,14 @@
-package com.servicios.libros.repository;
+package com.servicios.clientes.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.servicios.CommonLibrary.models.Cliente;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long>{
-	boolean existsById( Long id );
 	boolean existsByEmail( String email );
 	boolean existsByCedula( String cedula );
+	boolean existsById( Long id );
 }
