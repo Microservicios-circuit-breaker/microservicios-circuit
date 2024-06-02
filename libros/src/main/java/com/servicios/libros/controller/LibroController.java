@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.servicios.libros.dto.CreateLibroDTO;
 import com.servicios.libros.dto.LibroDTO;
 import com.servicios.libros.dto.UpdateLibroDTO;
 import com.servicios.libros.exception.LibroException;
@@ -46,8 +47,8 @@ public class LibroController {
     }
     
     @PostMapping( path = "/crear" )
-    public ResponseEntity<LibroDTO> createLibro(@Valid @RequestBody LibroDTO libroDTO) throws LibroException {   
-        return new ResponseEntity<>(iLibroService.createLibro(libroDTO), HttpStatus.CREATED);
+    public ResponseEntity<LibroDTO> createLibro(@Valid @RequestBody CreateLibroDTO createlibroDTO) throws LibroException {   
+        return new ResponseEntity<>(iLibroService.createLibro(createlibroDTO), HttpStatus.CREATED);
     }
     
     @PutMapping( path = "/actualizar" )

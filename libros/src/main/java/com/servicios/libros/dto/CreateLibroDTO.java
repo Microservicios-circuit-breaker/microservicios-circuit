@@ -5,13 +5,12 @@ import com.servicios.libros.utilities.LibroUtility;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Builder;
 
-public class UpdateLibroDTO {
+@Builder
+public class CreateLibroDTO {
 	
-	@NotBlank( message = LibroUtility.ID_NOT_NULL )
-	@NotNull( message = LibroUtility.ID_NOT_EMPTY )
-	private Long id;
-	
+
 	@Size( max = 30, min = 3, message = LibroUtility.TITULO_SIZE )
 	@NotBlank( message = LibroUtility.TITULO_NOT_EMPTY )
 	@NotNull( message = LibroUtility.TITULO_NOT_NULL )
@@ -25,15 +24,13 @@ public class UpdateLibroDTO {
 	private Long id_propietario;
 	
 
-	public UpdateLibroDTO() {}
+	public CreateLibroDTO() {}
 	
-	public UpdateLibroDTO(Long id, String titulo, String autor, Long id_propietario ) {
-		this.id = id;
+	public CreateLibroDTO( String titulo, String autor, Long id_propietario) {
+		this.id_propietario = id_propietario;
 		this.autor = autor;
 		this.titulo = titulo;
-		this.id_propietario = id_propietario;
 	}
-	
 	
 	public Long getId_propietario() {
 		return id_propietario;
@@ -41,14 +38,6 @@ public class UpdateLibroDTO {
 
 	public void setId_propietario(Long id_propietario) {
 		this.id_propietario = id_propietario;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -66,4 +55,5 @@ public class UpdateLibroDTO {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
+	
 }

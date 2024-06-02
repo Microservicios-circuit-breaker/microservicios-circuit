@@ -46,7 +46,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/crear")
-	public ResponseEntity<ClienteDTO> crear( @Valid @RequestBody ClienteDTO clienteDTO ) throws ClienteException{
+	public ResponseEntity<ClienteDTO> crear( @RequestBody @Valid ClienteDTO clienteDTO ) throws ClienteException{
 		return new ResponseEntity<ClienteDTO>( clienteService.crearCliente(clienteDTO), HttpStatus.CREATED );
 	}
 	
