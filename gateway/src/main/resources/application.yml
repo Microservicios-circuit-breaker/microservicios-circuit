@@ -1,0 +1,56 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+server:
+  port: 8090
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+      - id: clientes
+        predicates: Path=/api/cliente/**
+        uri: lb://clientes/
+      - id: libros
+        predicates: Path=/api/libro/**
+        uri: lb://libros
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userService:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+
+logging:
+  level:
+    root: INFO
+    com.servicios.gateway.config.ResilenceConfig: DEBUG
+    io.github.resilience4j: DEBUG
+
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
